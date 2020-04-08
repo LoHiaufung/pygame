@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 
 
-class CBaseFiele(object):
+class CBaseField(object):
 	NEED_TYPE = None
 
 	def __init__(self, val):
-		super(CBaseFiele, self).__init__()
+		super(CBaseField, self).__init__()
 		self._val = val
 
 	def serialize(self):
@@ -23,8 +23,18 @@ class CBaseFiele(object):
 	def getValue(self):
 		return self._val
 
-class CIntField(CBaseFiele):
+class CIntField(CBaseField):
 	NEED_TYPE = int
 
 	def __init__(self, val=0):
 		super(CIntField, self).__init__(val)
+
+	def __sub__(self, other):
+		return self._val - other
+
+class CListField(CBaseField):
+	NEED_TYPE = list
+
+	def __init__(self, val = []):
+		super(CListField, self).__init__(val)
+
