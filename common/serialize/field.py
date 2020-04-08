@@ -38,3 +38,52 @@ class CListField(CBaseField):
 	def __init__(self, val = []):
 		super(CListField, self).__init__(val)
 
+class CAutoSerObjListField(CBaseField):
+	NEED_TYPE = list
+	
+	def __init__(self, cls, val=[]):
+		super(CAutoSerObjListField, self).__init__(val)
+		self._cls = cls
+
+	def serialize(self):
+		res = []
+		for autoSubObj in self._val:
+			res.append(autoSubObj.serialize())
+		return res
+
+	def deserialize(self, seriaLst):
+		self._val = []
+		for seriaData in seriaLst:
+			item = self._cls()
+			item.deserialize(seriaData)
+			self._val.append(item)
+
+class CDictField(CBaseField):
+	NEED_TYPE = dict
+
+	def __init__(self, val= {}):
+		super(CDictField, self).__init__(val)
+
+
+class CAutoSerObjDictField(CBaseField):
+	NEED_TYPE = dict
+
+	def __init__(self, cls, val={}):
+		super(CAutoSerObjDictField, self).__init__(val)
+		self._cls = cls
+
+	def serialize(self):
+		res = {}
+		for key, subSerObj in self._val.iteritems():
+			res[key] = subSerObj.serialize()
+		return res
+
+	def deserialize(self, subObjDict):
+		res = {}
+		for key, subObjData in subObjDict.iteritems():
+			item = self._cls()
+			item.deserialize(subObjData)
+			res[key] = item
+		self._val = res
+
+
