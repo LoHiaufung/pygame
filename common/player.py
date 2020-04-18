@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-from common.serialize.auto_serialize_obj import CAutoSerObj
-import common.serialize.field as ModField
+from common import CAutoSerObj
+import common as ModField
 
 
 class CPlayer(CAutoSerObj):

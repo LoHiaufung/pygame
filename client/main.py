@@ -7,7 +7,7 @@ print 'path', path
 print '***'
 sys.path.append(path)
 
-from common.player import CPlayer
+from common import CPlayer
 
 if __name__ == '__main__':
 	print 'client main!'

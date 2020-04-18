@@ -2,6 +2,7 @@
 
 
 SERVER_FRAME = 30
+SOCKET_MAX_READ_LEN = 1024
 
 serverAddrDict = {
 	"center_control":{
